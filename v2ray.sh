@@ -818,7 +818,7 @@ installBBR() {
 
 installV2ray() {
     rm -rf /tmp/v2ray
-    mkdir -p /tmp/v2ray
+    mkdir -p /tmp/v2ray/v2ctl
     DOWNLOAD_LINK="${V6_PROXY}https://github.com/v2fly/v2ray-core/releases/download/${NEW_VER}/v2ray-linux-$(archAffix).zip"
     colorEcho $BLUE " 下载V2Ray: ${DOWNLOAD_LINK}"
     curl -L -H "Cache-Control: no-cache" -o /tmp/v2ray/v2ray.zip ${DOWNLOAD_LINK}
@@ -828,7 +828,7 @@ installV2ray() {
     fi
     mkdir -p '/etc/v2ray' '/var/log/v2ray' && \
     unzip /tmp/v2ray/v2ray.zip -d /tmp/v2ray
-    mkdir -p /usr/bin/v2ray
+    mkdir -p /usr/bin/v2ray/v2ctl
     cp /tmp/v2ray/v2ctl /usr/bin/v2ray/; cp /tmp/v2ray/v2ray /usr/bin/v2ray/; cp /tmp/v2ray/geo* /usr/bin/v2ray/;
     chmod +x '/usr/bin/v2ray/v2ray' '/usr/bin/v2ray/v2ctl' || {
         colorEcho $RED " V2ray安装失败"
@@ -851,7 +851,7 @@ Type=simple
 User=root
 #User=nobody
 NoNewPrivileges=true
-ExecStart=/usr/bin/v2ray/v2ray -config /etc/v2ray/config.json
+ExecStart=/usr/bin/env v2ray.vmess.aead.forced=false /usr/bin/v2ray/v2ray run -c /etc/v2ray/config.json
 Restart=on-failure
 
 [Install]
