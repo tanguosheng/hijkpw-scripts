@@ -852,7 +852,7 @@ Type=simple
 User=root
 #User=nobody
 NoNewPrivileges=true
-ExecStart=/usr/bin/env v2ray.vmess.aead.forced=false /usr/bin/v2ray/v2ray run -c /etc/v2ray/config.json
+ExecStart=/usr/bin/env v2ray.vmess.aead.forced=false /usr/bin/v2ray/v2ray -c /etc/v2ray/config.json
 Restart=on-failure
 
 [Install]
